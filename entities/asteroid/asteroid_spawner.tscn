@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cq5qndu24cq5u"]
+
+[ext_resource type="Script" uid="uid://dw1pvu4yoas17" path="res://entities/asteroid/asteroid_spawner.gd" id="1_u250v"]
+[ext_resource type="PackedScene" uid="uid://bemmf2sudugms" path="res://entities/asteroid/asteroid.tscn" id="2_a7axy"]
+[ext_resource type="Resource" uid="uid://cda2pc5t8f2eg" path="res://resources/game_state.tres" id="3_dmnmc"]
+
+[node name="AsteroidSpawner" type="Node2D" unique_id=1639650244]
+script = ExtResource("1_u250v")
+asteroid_prefabs = Array[PackedScene]([ExtResource("2_a7axy")])
+state = ExtResource("3_dmnmc")
