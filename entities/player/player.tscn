@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://d4e6o8lf4obe6" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="Texture2D" uid="uid://fiabcbq2u2b3" path="res://icon.svg" id="2_sglur"]
+[ext_resource type="Texture2D" uid="uid://bg48e1arrdu10" path="res://assets/weapons/katana.png" id="3_sglur"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 73.33485
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sglur"]
+radius = 34.782608
+height = 204.34782
 
 [node name="Player" type="Node2D" unique_id=1673922271]
 script = ExtResource("1_abrql")
@@ -9,3 +17,40 @@ script = ExtResource("1_abrql")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1740839768]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_sglur")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1595544853]
+scale = Vector2(4.9999995, 4.9999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=2022035822]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=508749165]
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("3_sglur")
+offset = Vector2(93.37, 0)
+
+[node name="WeaponArea2D" type="Area2D" parent="Sprite2D2" unique_id=684946416]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/WeaponArea2D" unique_id=991525722]
+position = Vector2(71.739136, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_sglur")
+disabled = true
+debug_color = Color(0.9647059, 0, 0, 0.41960785)
+
+[node name="RecoveryTimer" type="Timer" parent="." unique_id=1556084325]
+autostart = true
+
+[node name="StartupTimer" type="Timer" parent="." unique_id=1052255524]
+autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="." unique_id=423027689]
+autostart = true
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="RecoveryTimer" to="." method="_on_recovery_timer_timeout"]
+[connection signal="timeout" from="StartupTimer" to="." method="_on_startup_timer_timeout"]
+[connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]

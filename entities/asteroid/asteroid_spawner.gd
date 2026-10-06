@@ -18,4 +18,3 @@ func _on_round_start() -> void:
 		
 		
 		add_child(new_asteroid)
-
