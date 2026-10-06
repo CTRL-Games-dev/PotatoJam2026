@@ -444,7 +444,10 @@ tile_set = SubResource("TileSet_frs67")
 
 [node name="Player" parent="." unique_id=1673922271 instance=ExtResource("9_iqu8w")]
 move_speed = 40.0
+base_rotation_speed = 5.0
+rotation_speed = 5.0
 min_distance = 5.0
 distance_speed_multiplier = 10.0
+state = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=33123547]
