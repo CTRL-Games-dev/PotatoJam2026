@@ -6,13 +6,14 @@ extends Node2D
 @export var rotation_speed: float = 5
 @export var min_distance: float = 4
 @export var distance_speed_multiplier: float = 3 
-@export var base_attack_speed: float = 3
+@export var base_attack_speed: float = 1
 @export var attack_speed: float = base_attack_speed
+@onready var target_position: Vector2 = get_global_mouse_position()
 
 var target: Area2D
 var old_rotation: float
 var angle: float = 0
-var target_position: Vector2 = get_global_mouse_position()
+var angle_offset: float = 0
 var target_list: Array[Area2D] = []
 enum State{
 	NEUTRAL,
@@ -21,7 +22,6 @@ enum State{
 }
 @export var state: State = State.NEUTRAL
 
-var angle_offset: float = 0
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -53,17 +53,23 @@ func _process(delta: float) -> void:
 		
 		
 	if (state == State.NEUTRAL):
-		$RecoveryTimer.start(attack_speed)
 		if (target):
 			kesagiri()
-			print(state)
+			
 	elif (state == State.STARTUP):
 		pass
 		
 			
 	elif (state == State.ATTACK):
-		if ($ActiveTimer.time_left < attack_speed):
-			pass
+		if($ActiveTimer.time_left < attack_speed/1 && $ActiveTimer.time_left > attack_speed/2):
+			$Sprite2D2/WeaponArea2D/CollisionShape2D.disabled = false
+		else:
+			$Sprite2D2/WeaponArea2D/CollisionShape2D.disabled = true
+			
+			
+	print("Recovery: ", $RecoveryTimer.time_left)
+	print("Startup: ", $StartupTimer.time_left)
+	print("Active: ", $ActiveTimer.time_left)
 		
 		
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -75,27 +81,28 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	
 
 func kesagiri() -> void:
-	angle_offset = 0.5
 	rotation_speed = base_rotation_speed * 5
 
 
 
 func _on_recovery_timer_timeout() -> void:
 	state = State.STARTUP
-	attack_speed /= 3
+	angle_offset = 0.5
+	attack_speed = base_attack_speed/3
 	$StartupTimer.start(attack_speed)
 
 
 func _on_startup_timer_timeout() -> void:
 	state = State.ATTACK
 	angle_offset *= -2
-	rotation_speed = base_rotation_speed * 2
-	attack_speed /= 2
+	rotation_speed = base_rotation_speed * 5
+	attack_speed = base_attack_speed/5
 	$ActiveTimer.start(attack_speed)
 
 
 func _on_active_timer_timeout() -> void:
 	state = State.NEUTRAL
 	attack_speed = base_attack_speed
+	rotation_speed = base_rotation_speed
 	angle_offset = 0
 	$RecoveryTimer.start(attack_speed)
