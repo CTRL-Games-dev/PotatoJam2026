@@ -24,6 +24,10 @@ EventBus="*uid://cfxya28g7j8if"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+asteroids=""
+
 [input]
 
 MoveUp={

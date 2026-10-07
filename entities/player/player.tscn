@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d4e6o8lf4obe6" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="Texture2D" uid="uid://fiabcbq2u2b3" path="res://icon.svg" id="2_sglur"]
 [ext_resource type="Texture2D" uid="uid://bg48e1arrdu10" path="res://assets/weapons/katana.png" id="3_sglur"]
+[ext_resource type="Texture2D" uid="uid://dd33k126p3bk7" path="res://assets/other/select.png" id="4_bls4j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 73.33485
@@ -41,13 +42,18 @@ disabled = true
 debug_color = Color(0.9647059, 0, 0, 0.41960785)
 
 [node name="RecoveryTimer" type="Timer" parent="." unique_id=1556084325]
+one_shot = true
 autostart = true
 
 [node name="StartupTimer" type="Timer" parent="." unique_id=1052255524]
-autostart = true
+one_shot = true
 
 [node name="ActiveTimer" type="Timer" parent="." unique_id=423027689]
-autostart = true
+one_shot = true
+
+[node name="selection" type="Sprite2D" parent="." unique_id=721448970]
+visible = false
+texture = ExtResource("4_bls4j")
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]

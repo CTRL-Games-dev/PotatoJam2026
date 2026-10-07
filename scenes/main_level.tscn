@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://5hiymndssw5p" path="res://assets/tilemaps/Sprite_Tiles_YellowGrass.png" id="7_adxub"]
 [ext_resource type="Texture2D" uid="uid://bxwlm4he8idmo" path="res://assets/tilemaps/Sprite_Tiles_YellowGrassland.png" id="8_ff0s2"]
 [ext_resource type="PackedScene" uid="uid://bstqw3bl6shh" path="res://entities/player/player.tscn" id="9_iqu8w"]
+[ext_resource type="Script" uid="uid://b7pi2tnub6duk" path="res://scenes/space_crystal_spawner.gd" id="12_mwgft"]
+[ext_resource type="PackedScene" uid="uid://hyiyifhkh4hb" path="res://entities/other/space_crystal.tscn" id="13_adxub"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uk2yf"]
 texture = ExtResource("1_k5pu3")
@@ -444,10 +446,11 @@ tile_set = SubResource("TileSet_frs67")
 
 [node name="Player" parent="." unique_id=1673922271 instance=ExtResource("9_iqu8w")]
 move_speed = 40.0
-base_rotation_speed = 5.0
-rotation_speed = 5.0
 min_distance = 5.0
 distance_speed_multiplier = 10.0
-state = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=33123547]
+
+[node name="SpaceCrystalSpawner" type="Node2D" parent="." unique_id=117062704]
+script = ExtResource("12_mwgft")
+crystal_prefabs = Array[PackedScene]([ExtResource("13_adxub")])

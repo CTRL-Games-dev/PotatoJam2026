@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://hyiyifhkh4hb"]
+
+[ext_resource type="Script" uid="uid://k3g1yto52i8u" path="res://entities/other/space_crystal.gd" id="1_khomr"]
+[ext_resource type="Texture2D" uid="uid://ddyn35yefysqn" path="res://assets/other/space_crystal_1.png" id="1_mh7kk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 4.1231055
+
+[node name="Node2D" type="Node2D" unique_id=1652805254]
+script = ExtResource("1_khomr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2064788492]
+texture = ExtResource("1_mh7kk")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1677567244]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=147496900]
+shape = SubResource("CircleShape2D_g4v7s")
